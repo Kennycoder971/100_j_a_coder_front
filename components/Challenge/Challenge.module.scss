@@ -1,119 +1,124 @@
 .Challenge {
-    margin-left: 5vw;
-    margin-top: 5vh;
-    color: var(--black);
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    padding: var(--l-size);
-    border-radius: 10px;
-    
-    .challengeInfo {
+  margin-left: 5vw;
+  margin-top: 5vh;
+  color: var(--black);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: var(--l-size);
+  border-radius: 10px;
+  position: relative;
+
+  .options {
+    position: absolute;
+    right: 3%;
+    top: 5%;
+  }
+
+  .challengeInfo {
+    display: flex;
+    line-height: 48px;
+    border-bottom: 1px solid var(--blue);
+    padding-bottom: var(--l-size);
+
+    .userPhoto {
+      margin-right: var(--xl-size);
+
+      img {
+        border-radius: 10px;
+      }
+    }
+
+    .challengeContent {
+      .challengeTime {
         display: flex;
-        line-height: 48px;
-        border-bottom: 1px solid var(--blue);
-        padding-bottom: var(--l-size);
+        align-items: center;
 
-        .userPhoto {
-            margin-right: var(--xl-size);
-            
-            img {
-                border-radius: 10px;
-            }
+        .startedAt {
+          display: flex;
+
+          .username {
+            margin-right: 3px;
+            color: var(--blue);
+          }
         }
 
-        .challengeContent {
-          
-            .challengeTime {
-                display: flex;
-                align-items: center;
-                
-                .startedAt {
-                    display: flex;
-
-                    .username {
-                        margin-right: var(--s-size);
-                        color: var(--blue);
-                    }
-                }
-
-                .remainingTime {
-                    margin: 0 var(--s-size);
-                }
-
-                .timeLikes {
-                    display: flex;
-
-                    .likes {
-                        margin-left: 5vw;
-                        display: flex;
-                        align-items: center;
-    
-                        svg {
-                            margin-right: 1vw;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-
-            .challengeTitle,
-            .techologiesTitle  {
-                font-size: var(--m-size);
-                color: var(--black);
-                line-height: 1.5;
-                margin-bottom: 0;
-            }
-            
-            .timeADay {
-                font-weight: bold;
-            }
-
-            .techologies {
-                display: flex;
-                flex-wrap: wrap;
-                margin-top: var(--xs-size);
-            }
+        .remainingTime {
+          margin: 0 var(--s-size);
         }
-    }
 
-    .challengeComments {
-        margin-top: var(--l-size);
-    }
+        .timeLikes {
+          display: flex;
 
-    .challengeInput {
+          .likes {
+            margin-left: 5vw;
+            display: flex;
+            align-items: center;
+
+            svg {
+              margin-right: 1vw;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .challengeTitle,
+      .techologiesTitle {
+        font-size: var(--m-size);
+        color: var(--black);
+        line-height: 1.5;
+        margin-bottom: 0;
+      }
+
+      .timeADay {
+        font-weight: bold;
+      }
+
+      .techologies {
         display: flex;
-        margin-top: var(--l-size);
-        img {
-            border-radius: 5px;
-            margin-right: var(--l-size);
-        }
-
-        form {
-            width: 100%;
-            input {
-                margin-left: var(--m-size);
-            }
-        }
+        flex-wrap: wrap;
+        margin-top: var(--xs-size);
+        gap: 6px;
+      }
     }
+  }
+
+  .challengeComments {
+    margin-top: var(--l-size);
+  }
+
+  .challengeInput {
+    display: flex;
+    margin-top: var(--l-size);
+    img {
+      border-radius: 5px;
+      margin-right: var(--l-size);
+    }
+
+    form {
+      width: 100%;
+      input {
+        margin-left: var(--m-size);
+      }
+    }
+  }
 }
 
-@media screen  and (max-width:978px) {
-    .Challenge {
-        
-        .challengeInfo {
+@media screen and (max-width: 978px) {
+  .Challenge {
+    .challengeInfo {
+      display: block;
+      .challengeContent {
+        .challengeTime {
+          display: block;
+
+          .startedAt {
             display: block;
-            .challengeContent {
-               
-                .challengeTime {
-                    display: block;  
-                    
-                    .startedAt {
-                        display: block;
-                    }
-                    .remainingTime {
-                        margin-left: 0;
-                    }
-                }
-            }
+          }
+          .remainingTime {
+            margin-left: 0;
+          }
         }
+      }
     }
+  }
 }

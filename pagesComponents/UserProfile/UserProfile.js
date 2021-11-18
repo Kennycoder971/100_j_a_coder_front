@@ -4,10 +4,10 @@ import Challenge from "@/components/Challenge/Challenge";
 import APropos from "./Apropos";
 import FriendRequestsList from "./FriendRequestsList";
 import FriendList from "./FriendList";
-import Link from "next/link";
 import Image from "next/image";
 import { FiSettings } from "react-icons/fi";
 import ProfileModal from "./ProfileModal";
+import getLastChallenge from "@/queries/challenges/getLastchallenge";
 
 const UserProfile = ({ user }) => {
   // For the tabs
@@ -35,6 +35,20 @@ const UserProfile = ({ user }) => {
       document.querySelector("body").style.overflow = "auto";
     }
   }, [showModal]);
+
+  // See if the user has a challenge
+  const [challenge, setChallenge] = useState(null);
+
+  useEffect(() => {
+    (async function() {
+      try {
+        const response = await getLastChallenge();
+        setChallenge(response.data.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    })();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -92,7 +106,12 @@ const UserProfile = ({ user }) => {
             <h3 className={styles.descriptionTitle}>Description</h3>
             <p>{user?.profile ? user.profile : "Pas de description !"}</p>
           </article>
-          <Challenge />
+
+          {challenge ? (
+            <Challenge user={user} />
+          ) : (
+            <button> Se lancer un défi</button>
+          )}
         </React.Fragment>
       )}
 

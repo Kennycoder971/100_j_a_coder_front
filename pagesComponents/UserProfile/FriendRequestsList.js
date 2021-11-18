@@ -1,20 +1,17 @@
 import styles from "./FriendRequestsList.module.scss";
 import FriendCard from "@/components/FriendCard/FriendCard";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import getAllFriendRequests from "@/queries/friendRequests/getAllFriendRequests";
 import deleteFriendRequestById from "@/queries/friendRequests/deleteFriendRequestById";
+import acceptFriendRequest from "@/queries/friendRequests/acceptFriendRequest";
 
 let currPage = 1;
 
-function funy() {
-  this.bind();
-}
-
-export default function FriendRequests({ user }) {
+export default function FriendRequests({}) {
   const [requesters, setRequesters] = useState([]);
 
   useEffect(() => {
-    (async function () {
+    (async function() {
       const response = await getAllFriendRequests();
       setRequesters(response.data.data);
     })();
@@ -29,7 +26,22 @@ export default function FriendRequests({ user }) {
   }
 
   function deleteRequest(reqId) {
-    return async function () {
+    return async function() {
+      if (confirm("En êtes vous sûr ?")) {
+        await deleteFriendRequestById(reqId);
+        setRequesters((prevState) => ({
+          ...prevState,
+          docs: [...prevState.docs].filter(
+            (user) => user.request_id_from !== reqId
+          ),
+        }));
+      }
+    };
+  }
+
+  function addFriend(reqId) {
+    return async function() {
+      await acceptFriendRequest(reqId);
       await deleteFriendRequestById(reqId);
       setRequesters((prevState) => ({
         ...prevState,
@@ -47,7 +59,10 @@ export default function FriendRequests({ user }) {
           <FriendCard
             key={user.id}
             user={user}
-            selectOptions={[["Supprimer", deleteRequest(user.request_id_from)]]}
+            selectOptions={[
+              ["Supprimer", deleteRequest(user.request_id_from)],
+              ["Ajouter", addFriend(user.request_id_from)],
+            ]}
           />
         );
       })}

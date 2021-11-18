@@ -4,11 +4,12 @@ import ProfileModalFormImages from "./ProfileModalFormImages";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import ProfileModalChallenge from "./ProfileModalChallenge";
 
-export default function ProfileModal({ setShowModal }) {
+export default function ProfileModal({ setShowModal, openChallenge }) {
   const [currentTab, setCurrentTab] = useState(0);
 
-  const tabs = ["Vos informations", "Vos images"].map((tab, index) => {
+  const tabs = ["Vos informations", "Vos images", "Défi"].map((tab, index) => {
     return (
       <li key={index} onClick={(e) => setCurrentTab(index)}>
         {" "}
@@ -33,6 +34,8 @@ export default function ProfileModal({ setShowModal }) {
         {currentTab === 0 && <ProfileModalForm />}
 
         {currentTab === 1 && <ProfileModalFormImages />}
+
+        {currentTab === 2 && <ProfileModalChallenge />}
       </div>
     </div>
   );

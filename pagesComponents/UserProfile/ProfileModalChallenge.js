@@ -3,15 +3,12 @@ import InputEl from "@/components/InputEl/InputEl";
 import { toast } from "react-toastify";
 import getErrorMsg from "@/helpers/getErrorMsg";
 import getLastChallenge from "@/queries/challenges/getLastchallenge";
+import createChallenge from "@/queries/challenges/createChallenge";
+import updateLastChallenge from "@/queries/challenges/updateLastChallenge";
 
-export default function ProfileModalChallenge() {
-  const [challenge, setChallenge] = useState({
-    text: "",
-    technologies: "",
-    hours_a_day: "",
-  });
+export default function ProfileModalChallenge({}) {
+  const [challenge, setChallenge] = useState(null);
 
-  
   const [fields, setFields] = useState({
     text: challenge?.text || "",
     technologies: challenge?.technologies || "",
@@ -19,7 +16,7 @@ export default function ProfileModalChallenge() {
   });
 
   useEffect(() => {
-    (async function () {
+    (async function() {
       try {
         const response = await getLastChallenge();
         if (response.data.data) {
@@ -32,7 +29,6 @@ export default function ProfileModalChallenge() {
     })();
   }, []);
 
-  console.log(fields);
   function handleInputChange(evt) {
     const { name, value } = evt.target;
     setFields({ ...fields, [name]: value });
@@ -54,17 +50,26 @@ export default function ProfileModalChallenge() {
 
   async function handleChallenge(evt) {
     evt.preventDefault();
-    try {
-      const response = 2;
 
-      toast.success("Vos données on bien été modifiees");
+    try {
+      if (!challenge) {
+        const response = await createChallenge(fields);
+
+        toast.success("Votre défi a été créé !");
+        return;
+      }
+
+      const response = await updateLastChallenge(fields);
+
+      toast.success("Votre défi a été modifié !");
     } catch (error) {
+      console.log(fields);
       getErrorMsg(error.response.data)?.forEach((err) => toast.error(err));
     }
   }
 
   return (
-    <form method="POST" onSubmit={() => {}}>
+    <form method="POST" onSubmit={(evt) => handleChallenge(evt)}>
       <div>
         <label htmlFor="text">But</label>
         <InputEl
@@ -97,8 +102,7 @@ export default function ProfileModalChallenge() {
           value={fields.hours_a_day}
           onChange={(evt) => handleInputChange(evt)}
         >
-          <option>Sélectionner</option>
-
+          <option value="">Sélectionnez</option>
           {arrayOfHoursOptions(16)}
         </select>
       </div>

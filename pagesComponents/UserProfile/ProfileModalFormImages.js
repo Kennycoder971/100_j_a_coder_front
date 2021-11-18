@@ -22,7 +22,7 @@ export default function ProfileModalFormImages() {
 
     try {
       if (profilePic) {
-        const response = await updateUserPhoto(user?.id, formData);
+        const response = await updateUserPhoto(formData);
         setUser((prevState) => ({
           ...prevState,
           profile_picture: response.data.data,
@@ -37,6 +37,8 @@ export default function ProfileModalFormImages() {
       }
       toast.success("Vos données on bien été modifiées");
     } catch (error) {
+      const errMsg = error.response.data.errorMessage;
+      if (errMsg) toast.error(errMsg);
       getErrorMsg(error.response.data)?.forEach((err) => toast.error(err));
     }
   }
