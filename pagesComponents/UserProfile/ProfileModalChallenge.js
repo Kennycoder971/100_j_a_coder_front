@@ -53,13 +53,12 @@ export default function ProfileModalChallenge({}) {
 
     try {
       if (!challenge) {
-        const response = await createChallenge(fields);
+        await createChallenge(fields);
 
         toast.success("Votre défi a été créé !");
         return;
       }
-
-      const response = await updateLastChallenge(fields);
+      await updateLastChallenge(fields);
 
       toast.success("Votre défi a été modifié !");
     } catch (error) {

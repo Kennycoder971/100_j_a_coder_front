@@ -25,7 +25,7 @@ const Comment = ({ text, user }) => (
       <p className={styles.commentContent}>{text}</p>
     </div>
     <div className={styles.likes}>
-      <AiFillHeart /> <span>2</span>
+      <AiFillHeart /> <span>1</span>
     </div>
   </div>
 );

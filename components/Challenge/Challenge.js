@@ -12,12 +12,14 @@ import { getTimeRemaining, daysAgo } from "@/helpers/formatDates";
 import createChallengeLike from "@/queries/challengeLikes/createChallengeLike";
 import getChallengeLikes from "@/queries/challengeLikes/getChallengeLikes";
 import { toast } from "react-toastify";
+import getChallengeComments from "@/queries/challengeComments/getChallengeComents";
+import createChallengeComments from "@/queries/challengeComments/createChallengeComments";
+import getErrorMsg from "@/helpers/getErrorMsg";
 
 const Challenge = ({ selectOptions, user }) => {
-  // For the challenge
   const [challenge, setChallenge] = useState(null);
   const [challengeLikes, setChallengeLikes] = useState(null);
-  const [challengeTech, setChallengeTech] = useState(null);
+  const [challengeComments, setChallengeComments] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState({
     string: "",
     object: {
@@ -45,6 +47,8 @@ const Challenge = ({ selectOptions, user }) => {
         setChallengeLikes(response2.data.data);
 
         // Get comments for the challenge
+        const response3 = await getChallengeComments(response.data.data.id);
+        setChallengeComments(response3.data.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -63,6 +67,9 @@ const Challenge = ({ selectOptions, user }) => {
     return () => clearInterval(interval);
   });
 
+  const [challengeTechArray, setChallengeTechArray] = useState(null);
+  const [challengeCommentsArray, setChallengeCommentsArray] = useState(null);
+
   useEffect(() => {
     // Create a array of categories from the challenge.technologies
     const techArray = challenge?.technologies.split(",");
@@ -70,8 +77,14 @@ const Challenge = ({ selectOptions, user }) => {
       <Category text={tech} key={index} />
     ));
 
-    setChallengeTech(technologies);
-  }, [challenge]);
+    setChallengeTechArray(technologies);
+
+    const commentsArray = challengeComments?.map(({ content, id }) => {
+      return <Comment text={content} key={id} />;
+    });
+
+    setChallengeCommentsArray(commentsArray);
+  }, [challenge, challengeComments]);
 
   async function giveChallengeLike(challengeId) {
     try {
@@ -79,6 +92,24 @@ const Challenge = ({ selectOptions, user }) => {
       setChallengeLikes((like) => like + 1);
     } catch (error) {
       toast.error(error.response.data.errorMessage);
+    }
+  }
+  const [commentInputText, setCommentInputText] = useState("");
+
+  async function addChallengeComment(evt, challengeId) {
+    evt.preventDefault();
+
+    try {
+      // Create comment
+      await createChallengeComments(challengeId, commentInputText);
+      // Get comments for the challenge
+      const response = await getChallengeComments(challengeId);
+      setChallengeComments(response.data.data);
+    } catch (error) {
+      // Print error messages
+      getErrorMsg(error.response.data).forEach((errMsg) => {
+        toast.error(errMsg);
+      });
     }
   }
 
@@ -133,13 +164,10 @@ const Challenge = ({ selectOptions, user }) => {
             Pendant {challenge?.hours_a_day} heures pas jours
           </div>
           <h3 className={styles.techologiesTitle}>Technologies:</h3>
-          <div className={styles.techologies}>{challengeTech}</div>
+          <div className={styles.techologies}>{challengeTechArray}</div>
         </div>
       </div>
-      <div className={styles.challengeComments}>
-        <Comment />
-        <Comment />
-      </div>
+      <div className={styles.challengeComments}>{challengeCommentsArray}</div>
       <div className={`${styles.challengeInput}`}>
         <Image
           width={40}
@@ -151,14 +179,18 @@ const Challenge = ({ selectOptions, user }) => {
           }
           alt={user?.username}
         />
-        <form>
+        <form onSubmit={(evt) => addChallengeComment(evt, challenge.id)}>
           <input
             type="text"
             name="comment"
             placeholder="Écrivez un commentaire."
             id="comment-input"
             className="blue-input"
+            value={commentInputText}
+            onChange={(evt) => setCommentInputText(evt.target.value)}
           />
+
+          <button type="submit">+</button>
         </form>
       </div>
     </div>

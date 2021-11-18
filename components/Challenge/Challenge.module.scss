@@ -96,6 +96,18 @@
 
     form {
       width: 100%;
+      position: relative;
+
+      button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        padding: 0.3rem 0.5rem;
+        border: 0;
+        cursor: pointer;
+        border-radius: 3px;
+        transform: translate(50%, -50%);
+      }
       input {
         margin-left: var(--m-size);
       }
