@@ -1,0 +1,41 @@
+.UserInfo {
+  padding: var(--xs-size);
+  border-bottom: 1px solid var(--gray);
+  display: flex;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: var(--gray-2);
+  }
+  img {
+    border-radius: 10px;
+  }
+
+  .userDetails {
+    margin-left: var(--m-size);
+
+    h4 {
+      margin-bottom: var(--s-size);
+      color: var(--blue);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .UserInfo {
+    display: block;
+
+    img {
+      width: 30px;
+      border-radius: 5px;
+    }
+
+    .userDetails {
+      margin-left: 0;
+      h4 {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

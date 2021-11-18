@@ -1,0 +1,36 @@
+.Comment {
+line-height: 1;
+    .userInfo {
+        display: flex;
+        align-items: center;
+
+        .userImage {
+            margin-right: var(--s-size);
+            
+
+            img {
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .commentContent {
+        padding: var(--s-size) var(--ml-size); 
+        background-color: var(--gray-2);
+        border-radius: 5px;
+    }
+
+    .likes {
+        
+        margin: var(--s-size);
+        margin-left: calc(40px + var(--s-size));
+        display: flex;
+        align-items: center;
+
+        svg {
+            cursor: pointer;
+            fill: red;
+            margin-right: var(--s-size);
+        }
+    }
+}

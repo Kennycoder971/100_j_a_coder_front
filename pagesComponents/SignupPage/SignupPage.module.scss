@@ -1,0 +1,120 @@
+// Mobile first approach
+.signupPage {
+  line-height: 1.5;
+  position: relative;
+
+  .formWave {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .illustrations {
+    display: none;
+  }
+  .container {
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: var(--m-size);
+
+    .text {
+      margin-bottom: var(--m-size);
+      h1 {
+        margin: var(--xxl-size) 0 var(--l-size) 0;
+        font-size: var(--ml-size);
+      }
+    }
+
+    .formControl {
+      margin-bottom: var(--m-size);
+
+      label {
+        font-weight: bold;
+        font-size: 1.7rem;
+        margin-bottom: var(--m-size);
+        display: inline-block;
+      }
+    }
+    p {
+      margin-bottom: var(--l-size);
+    }
+
+    button {
+      margin-bottom: var(--m-size);
+      width: 100%;
+      font-size: var(--m-size);
+      padding: var(--s-size);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .signupPage {
+    .container {
+      .formContainer {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .signupPage {
+    line-height: 1.5;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+
+    .illustrations {
+      display: block;
+      flex: 1;
+      max-width: 45vw;
+      min-height: 100vh;
+      background-color: var(--blue);
+      position: relative;
+      color: var(--white);
+      margin-right: 1rem;
+
+      h1 {
+        position: absolute;
+        left: 20%;
+        top: 20%;
+        font-size: var(--xl-size);
+      }
+      .system,
+      .undraw,
+      .wave {
+        position: absolute;
+      }
+      .system {
+        left: 10%;
+        top: 5%;
+      }
+
+      .undraw {
+        bottom: 0;
+        left: 10%;
+      }
+      .wave {
+        right: 0;
+        top: 0;
+        transform: translateX(65%);
+        min-height: 120vh;
+        width: 205px;
+      }
+    }
+
+    .container {
+      flex: 1;
+
+      .formContainer {
+        max-width: 500px;
+        margin: 0 auto;
+        h1 {
+          margin: var(--m-size) 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+// Mobile first approach
+.community {
+  min-height: 30vh;
+  margin-top: 10vh;
+
+  .imgGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .text {
+      max-width: 1100px;
+      width: 90%;
+      margin: 0 auto;
+      text-align: center;
+      margin-bottom: var(--ml-size);
+
+      p {
+        margin: var(--ml-size) 0;
+        color: var(--paragraph-blue);
+        line-height: 30px;
+      }
+    }
+
+    .subGrid {
+      display: flex;
+      justify-content: space-between;
+      flex: 1 1 45%;
+      margin-top: 5vh;
+
+      img {
+        width: 40px;
+      }
+    }
+
+    .sub1 {
+      margin-right: 7vw;
+    }
+
+    .transTop {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .community {
+    height: 40vh;
+
+    .imgGrid {
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .text {
+        order: 2;
+        padding: 0 3vw;
+      }
+      .sub1 {
+        order: 1;
+        margin-right: 0;
+      }
+      .sub2 {
+        order: 3;
+      }
+      .subGrid {
+        flex: 1 1 30%;
+        img {
+          width: 120%;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .community {
+    .imgGrid {
+      .text {
+        width: 50%;
+      }
+      .subGrid {
+        img {
+          width: 70px;
+        }
+      }
+    }
+  }
+}

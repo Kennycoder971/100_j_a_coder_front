@@ -1,0 +1,55 @@
+// Mobile first approach
+.topMenu {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 5vh;
+  z-index: 2;
+  padding: 0 1rem;
+
+  .container {
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .hamberger {
+    width: 40px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+    cursor: pointer;
+    transition: 0.3s;
+
+    .line {
+      height: 2px;
+      width: 100%;
+      background-color: black;
+      transition: 0.3s;
+
+      &:nth-child(1) {
+        width: 80%;
+      }
+      &:nth-child(3) {
+        width: 50%;
+      }
+    }
+
+    &:hover {
+      opacity: 0.3;
+    }
+
+    &:hover .line {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 785px) {
+  .topMenu {
+    display: none;
+  }
+}

@@ -1,0 +1,87 @@
+.Messages {
+  margin-top: 5vh;
+
+  .container {
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: var(--m-size);
+
+    h1 {
+      margin-bottom: var(--m-size);
+      font-size: var(--ml-size);
+    }
+
+    .nav {
+      display: flex;
+
+      svg {
+        margin-right: 3vw;
+      }
+
+      .backBtn {
+        cursor: pointer;
+      }
+    }
+    main {
+      display: grid;
+      grid-template-columns: repeat(2, 30% 70%);
+      min-height: 50vh;
+
+      .userInfo,
+      .messages {
+        padding: var(--m-size);
+        border: 1px solid var(--gray);
+      }
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: var(--xl-size);
+        position: relative;
+
+        .messageForm {
+          position: absolute;
+          bottom: 1vh;
+          width: 96%;
+          left: 50%;
+          transform: translateX(-50%);
+
+          button {
+            position: absolute;
+            right: var(--m-size);
+            cursor: pointer;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: var(--xs-size);
+            line-height: 0;
+            border: 0;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Messages {
+    .container {
+      main {
+        .userInfo {
+          padding: 0;
+        }
+        .messages {
+          .messageForm {
+            width: 92%;
+
+            button {
+              right: var(--xs-size);
+            }
+          }
+        }
+      }
+    }
+  }
+}

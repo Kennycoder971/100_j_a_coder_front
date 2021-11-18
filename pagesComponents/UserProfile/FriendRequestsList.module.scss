@@ -1,0 +1,22 @@
+.FriendRequests {
+  display: grid;
+  gap: var(--m-size);
+  min-height: 500px;
+  margin-left: 5vw;
+  margin-top: 5vh;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: var(--xl-size);
+  border-radius: 10px;
+  position: relative;
+
+  .more {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--green);
+    cursor: pointer;
+    border: 0;
+  }
+}

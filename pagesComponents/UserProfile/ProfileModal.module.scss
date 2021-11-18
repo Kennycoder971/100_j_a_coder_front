@@ -1,0 +1,83 @@
+.ProfileModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: 0.5s;
+  width: 100vw;
+  z-index: 99;
+  background-color: var(--white);
+  height: 100vh;
+  overflow: auto;
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 20% 80%);
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 3vh 0;
+
+    .close {
+      position: absolute;
+      right: 5vw;
+      cursor: pointer;
+    }
+
+    ul {
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.5;
+      font-size: 1.8rem;
+
+      li {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        margin-bottom: var(--s-size);
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          background-color: var(--blue);
+          opacity: 0;
+        }
+
+        &:hover::before {
+          opacity: 1;
+        }
+      }
+    }
+    form {
+      min-width: 70%;
+      margin: 0 auto;
+
+      button {
+        width: 100%;
+        margin-top: var(--m-size);
+        background-color: var(--green);
+        font-size: var(--m-size);
+        padding: var(--s-size);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ProfileModal {
+    .container {
+      display: block;
+
+      ul {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 3vh;
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+body {
+  // Colors
+  --blue: #198cd9;
+  --blue-trans: #198cd983;
+  --gray: #e8e8e8;
+  --gray-2: #eeeeee;
+  --l-blue: #40a2e4;
+  --very-l-blue: #c3e7ff;
+  --green: #00e676;
+  --paragraph-blue: #003f69;
+
+  // Gradients
+  --blue-gr: linear-gradient(
+    270deg,
+    #198cd9 6.67%,
+    rgba(25, 140, 217, 0.83) 50%
+  );
+  --black-gr: linear-gradient(
+    270deg,
+    #312e3a 6.67%,
+    rgba(49, 46, 58, 0.83) 50%
+  );
+  --green-gr: linear-gradient(
+    270deg,
+    #00e676 6.67%,
+    rgba(0, 230, 118, 0.83) 50%
+  );
+
+  // Neutrals
+  --white: #ffffff;
+  --black: #312e3a;
+
+  // Sizes
+  --xs-size: 0.8rem;
+  --s-size: 1.2rem;
+  --m-size: 1.6rem;
+  --ml-size: 2.4rem;
+  --l-size: 3.6rem;
+  --xl-size: 4.8rem;
+  --xxl-size: 6.4rem;
+
+  // Shadow
+  --flat-sh: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

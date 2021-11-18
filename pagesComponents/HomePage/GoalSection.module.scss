@@ -1,0 +1,53 @@
+// Mobile first approach
+.goals {
+  margin-top: 5vh;
+  text-align: center;
+
+  .text {
+    margin-bottom: 5vh;
+    line-height: 1.5;
+
+    .desktopText {
+      display: none;
+    }
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1100px;
+  }
+  .deskImage {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .goals {
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .deskImage {
+        display: block;
+      }
+      .phoneImage {
+        display: none;
+      }
+
+      .text {
+        text-align: left;
+        width: 50%;
+
+        h2 {
+          margin-bottom: 1rem;
+        }
+
+        .desktopText {
+          display: block;
+        }
+      }
+    }
+  }
+}

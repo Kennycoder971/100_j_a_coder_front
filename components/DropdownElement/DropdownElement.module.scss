@@ -1,0 +1,8 @@
+.DropdownElement {
+    padding:var(--xs-size);
+    transition: .5s;
+
+    &:hover {
+        background-color: var(--white);
+    }
+}

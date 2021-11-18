@@ -1,0 +1,75 @@
+.container {
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: var(--m-size);
+  line-height: 2;
+
+  h3 {
+    font-weight: bold;
+    font-size: var(--ml-size);
+    color: var(--blue);
+    margin-bottom: var(--m-size);
+  }
+
+  .hero {
+    position: relative;
+
+    .userImage {
+      left: 5vw;
+      bottom: -3vh;
+      position: absolute;
+
+      img {
+        background-color: var(--white);
+        background-repeat: no-repeat;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .tabs,
+  .user,
+  .description {
+    margin-left: 5vw;
+    margin-top: 5vh;
+  }
+  .user {
+    display: flex;
+    justify-content: space-between;
+  }
+  .interaction {
+    display: flex;
+    gap: var(--m-size);
+  }
+
+  .userInfo {
+    width: fit-content;
+  }
+
+  .userSettings,
+  .friendRequest {
+    background-color: var(--green);
+    height: fit-content;
+    padding: 0.1rem var(--xs-size);
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .tabs {
+    display: flex;
+
+    li {
+      margin-right: var(--m-size);
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        color: var(--blue);
+      }
+    }
+
+    .selected {
+      border-bottom: 2px solid var(--blue);
+    }
+  }
+}

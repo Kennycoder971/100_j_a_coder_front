@@ -1,0 +1,89 @@
+// Mobile first approach
+.hero {
+  text-align: center;
+  padding-top: 15vh;
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    left: 0%;
+    z-index: -1;
+    top: 0;
+    background-color: var(--very-l-blue);
+  }
+
+  h1 {
+    font-size: var(--l-size);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: var(--m-size);
+  }
+
+  p {
+    color: var(--paragraph-blue);
+    margin-bottom: var(--m-size);
+  }
+
+  a {
+    margin-left: 1rem;
+  }
+}
+.mainBg {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 65vh;
+  background-color: var(--very-l-blue);
+  border-radius: 50%;
+  left: 0%;
+  top: -7vh;
+}
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+}
+
+@media screen and (min-width: 768px) {
+  .heroContainer {
+    position: relative;
+
+    .heroContainerWrapper {
+      max-width: 1100px;
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+    }
+    .hero {
+      z-index: 0;
+      position: static;
+      display: flex;
+      text-align: left;
+      flex-direction: column;
+      &::before {
+        display: none;
+      }
+
+      .btnContainer {
+        a:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  .mainBg {
+    top: -10vw;
+    left: 10vw;
+    z-index: -10;
+    width: 50vw;
+    height: 50vw;
+    transform: translate(-30%, -30%);
+    min-width: 730px;
+    min-height: 730px;
+  }
+}

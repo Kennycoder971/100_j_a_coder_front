@@ -1,0 +1,116 @@
+// Mobile first approach
+
+.navigation {
+  height: 95vh;
+  background-color: var(--blue);
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  padding: var(--l-size) var(--ml-size);
+  color: var(--white);
+  transform: translateY(100%);
+  transition: 0.3s;
+
+  .logo {
+    display: none;
+  }
+  &.open {
+    transform: translateY(0);
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 2rem;
+    background-color: var(--l-blue);
+    width: 40px;
+    height: 40px;
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    span {
+      transform: translateY(-2px);
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding-bottom: var(--m-size);
+    margin-bottom: var(--m-size);
+    border-bottom: 1px solid var(--white);
+
+    span {
+      margin-left: var(--m-size);
+    }
+  }
+
+  .navMenu {
+    .navDesk {
+      display: none;
+    }
+    .navItem {
+      margin-bottom: var(--m-size);
+
+      span {
+        margin-left: var(--xs-size);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 785px) {
+  .navigation {
+    position: relative;
+    transform: translateY(0);
+    height: fit-content;
+    background-color: transparent;
+    color: var(--black);
+    align-items: center;
+
+    .navContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    .logo {
+      display: block;
+      position: relative;
+    }
+    .user {
+      display: none;
+    }
+    .closeBtn {
+      display: none;
+    }
+    .navMenu {
+      display: flex;
+
+      .blueDesk {
+        span {
+          color: var(--blue);
+        }
+      }
+      .navItem {
+        margin-right: 1vw;
+        font-weight: bolder;
+
+        a {
+          img {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}
