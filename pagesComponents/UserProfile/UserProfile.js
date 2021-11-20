@@ -8,6 +8,8 @@ import Image from "next/image";
 import { FiSettings } from "react-icons/fi";
 import ProfileModal from "./ProfileModal";
 import getLastChallenge from "@/queries/challenges/getLastchallenge";
+import deleteLastChallenge from "@/queries/challenges/deleteLastChallenge";
+import getErrorMsg from "@/helpers/getErrorMsg";
 
 const UserProfile = ({ user }) => {
   // For the tabs
@@ -28,6 +30,10 @@ const UserProfile = ({ user }) => {
 
   // For the modal
   const [showModal, setShowModal] = useState(false);
+
+  // To open the modal on the challenge tab
+  const [openChallenge, setOpenChallenge] = useState(false);
+
   useEffect(() => {
     if (showModal) {
       document.querySelector("body").style.overflow = "hidden";
@@ -40,15 +46,29 @@ const UserProfile = ({ user }) => {
   const [challenge, setChallenge] = useState(null);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       try {
         const response = await getLastChallenge();
+        console.log(response.data);
         setChallenge(response.data.data);
       } catch (error) {
         console.log(error.response);
       }
     })();
   }, []);
+
+  // Add option to remove a challenge
+  async function removeChallenge() {
+    try {
+      // Create comment
+      await deleteLastChallenge();
+      setChallenge(null);
+      toast.success("Votre défi a bien été supprimé.");
+    } catch (error) {
+      // Print error messages
+      console.log(error.response);
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -108,9 +128,20 @@ const UserProfile = ({ user }) => {
           </article>
 
           {challenge ? (
-            <Challenge user={user} />
+            <Challenge
+              user={user}
+              selectOptions={[["Supprimer", removeChallenge]]}
+            />
           ) : (
-            <button> Se lancer un défi</button>
+            <button
+              className={styles.challengeButton}
+              onClick={() => {
+                setOpenChallenge(true);
+              }}
+            >
+              {" "}
+              Se lancer un défi
+            </button>
           )}
         </React.Fragment>
       )}

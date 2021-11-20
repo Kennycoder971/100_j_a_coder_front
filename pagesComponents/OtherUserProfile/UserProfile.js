@@ -7,9 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaRegEnvelope } from "react-icons/fa";
 import ProfileModal from "./ProfileModal";
+import getUserLastchallenge from "@/queries/challenges/getUserLastchallenge";
 
 const UserProfile = ({ user }) => {
-  console.log(user.profile_cover);
   // For the tabs
   const [selected, setSelected] = useState(0);
   const tabs = ["Profil", "À propos", "Amis"].map((tab, index) => {
@@ -34,6 +34,20 @@ const UserProfile = ({ user }) => {
     }
   }, [showModal]);
 
+  // See if the user has a challenge
+  const [challenge, setChallenge] = useState(null);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await getUserLastchallenge(user.id);
+        console.log(response.data);
+        setChallenge(response.data.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    })();
+  }, []);
   return (
     <div className={styles.container}>
       <main className={styles.hero}>
@@ -95,7 +109,13 @@ const UserProfile = ({ user }) => {
             <p>{user?.profile ? user.profile : "Pas de description !"}</p>
           </article>
 
-          <Challenge />
+          {challenge ? (
+            <Challenge user={user} />
+          ) : (
+            <p className={styles.noChallenge}>
+              Cet utilisateur n'a pas encore de défi.
+            </p>
+          )}
         </React.Fragment>
       )}
 

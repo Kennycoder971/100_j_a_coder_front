@@ -16,7 +16,7 @@ export default function ProfileModalChallenge({}) {
   });
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       try {
         const response = await getLastChallenge();
         if (response.data.data) {
@@ -56,11 +56,17 @@ export default function ProfileModalChallenge({}) {
         await createChallenge(fields);
 
         toast.success("Votre défi a été créé !");
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
         return;
       }
       await updateLastChallenge(fields);
 
       toast.success("Votre défi a été modifié !");
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
     } catch (error) {
       console.log(fields);
       getErrorMsg(error.response.data)?.forEach((err) => toast.error(err));
@@ -73,7 +79,7 @@ export default function ProfileModalChallenge({}) {
         <label htmlFor="text">But</label>
         <InputEl
           inputName="text"
-          value={fields.text}
+          value={fields?.text}
           onChange={(evt) => handleInputChange(evt)}
         />
         <small style={{ marginBottom: "1rem", display: "inline-block" }}>
@@ -84,7 +90,7 @@ export default function ProfileModalChallenge({}) {
         <label htmlFor="technologies">Technologies à pratiquer</label>
         <InputEl
           inputName="technologies"
-          value={fields.technologies}
+          value={fields?.technologies}
           onChange={(evt) => handleInputChange(evt)}
         />
         <small style={{ marginBottom: "1rem", display: "inline-block" }}>
@@ -98,7 +104,7 @@ export default function ProfileModalChallenge({}) {
           name="hours_a_day"
           id="hours_a_day"
           className="blue-input"
-          value={fields.hours_a_day}
+          value={fields?.hours_a_day}
           onChange={(evt) => handleInputChange(evt)}
         >
           <option value="">Sélectionnez</option>

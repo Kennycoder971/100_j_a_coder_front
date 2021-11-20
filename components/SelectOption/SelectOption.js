@@ -32,11 +32,6 @@ const SelectOption = ({ selectOptions }) => {
 };
 
 SelectOption.defaultProps = {
-  user: {
-    profile_picture: "/images/user-profile/no-image.png",
-    id: "me",
-    username: "",
-  },
-  selectOptions: [["option1", function () {}]],
+  selectOptions: [["option1", function() {}]],
 };
 export default SelectOption;

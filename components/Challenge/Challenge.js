@@ -7,7 +7,7 @@ import Category from "../Category/Category";
 import Image from "next/dist/client/image";
 import SelectOption from "../SelectOption/SelectOption";
 import { useState, useEffect } from "react";
-import getLastChallenge from "@/queries/challenges/getLastchallenge";
+import getUserLastChalenge from "@/queries/challenges/getUserLastchallenge";
 import { getTimeRemaining, daysAgo } from "@/helpers/formatDates";
 import createChallengeLike from "@/queries/challengeLikes/createChallengeLike";
 import getChallengeLikes from "@/queries/challengeLikes/getChallengeLikes";
@@ -32,9 +32,9 @@ const Challenge = ({ selectOptions, user }) => {
 
   // Get and set challenge infos
   useEffect(() => {
-    (async function() {
+    (async function () {
       try {
-        const response = await getLastChallenge();
+        const response = await getUserLastChalenge(user.id);
         setChallenge(response.data.data);
 
         setTimeRemaining({
@@ -72,13 +72,15 @@ const Challenge = ({ selectOptions, user }) => {
 
   useEffect(() => {
     // Create a array of categories from the challenge.technologies
-    const techArray = challenge?.technologies.split(",");
-    const technologies = techArray?.map((tech, index) => (
-      <Category text={tech} key={index} />
-    ));
 
-    setChallengeTechArray(technologies);
+    if (challenge?.technologies) {
+      const techArray = challenge?.technologies?.split(",");
+      const technologies = techArray?.map((tech, index) => (
+        <Category text={tech} key={index} />
+      ));
 
+      setChallengeTechArray(technologies);
+    }
     const commentsArray = challengeComments?.map(({ content, id }) => {
       return <Comment text={content} key={id} />;
     });
@@ -163,8 +165,13 @@ const Challenge = ({ selectOptions, user }) => {
           <div className={styles.timeADay}>
             Pendant {challenge?.hours_a_day} heures pas jours
           </div>
-          <h3 className={styles.techologiesTitle}>Technologies:</h3>
-          <div className={styles.techologies}>{challengeTechArray}</div>
+
+          {challenge?.technologies && (
+            <>
+              <h3 className={styles.techologiesTitle}>Technologies:</h3>
+              <div className={styles.techologies}>{challengeTechArray}</div>
+            </>
+          )}
         </div>
       </div>
       <div className={styles.challengeComments}>{challengeCommentsArray}</div>
@@ -196,7 +203,5 @@ const Challenge = ({ selectOptions, user }) => {
     </div>
   );
 };
-
-Challenge.defaultProps = {};
 
 export default Challenge;

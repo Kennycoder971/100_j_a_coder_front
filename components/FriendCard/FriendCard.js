@@ -23,7 +23,7 @@ const FriendCard = ({ user, selectOptions }) => (
     <Link href={user?.id ? `/user/${user.id}` : "/user/me"}>
       <h4>{user.username}</h4>
     </Link>
-    <SelectOption selectOptions={selectOptions} />
+    {selectOptions && <SelectOption selectOptions={selectOptions} />}
   </li>
 );
 
@@ -33,6 +33,5 @@ FriendCard.defaultProps = {
     id: "me",
     username: "",
   },
-  selectOptions: [["option1", function () {}]],
 };
 export default FriendCard;
