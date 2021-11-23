@@ -5,6 +5,7 @@ import styles from "./Challenge.module.scss";
 import Comment from "../Comment/Comment";
 import Category from "../Category/Category";
 import Image from "next/dist/client/image";
+import Link from "next/dist/client/link";
 import SelectOption from "../SelectOption/SelectOption";
 import { useState, useEffect } from "react";
 import getUserLastChalenge from "@/queries/challenges/getUserLastchallenge";
@@ -34,7 +35,7 @@ const Challenge = ({ selectOptions, user }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await getUserLastChalenge(user.id);
+        const response = await getUserLastChalenge(user?.id);
         setChallenge(response.data.data);
 
         setTimeRemaining({
@@ -50,7 +51,7 @@ const Challenge = ({ selectOptions, user }) => {
         const response3 = await getChallengeComments(response.data.data.id);
         setChallengeComments(response3.data.data);
       } catch (error) {
-        console.log(error.response);
+        console.log(error.message);
       }
     })();
   }, []);
@@ -81,8 +82,8 @@ const Challenge = ({ selectOptions, user }) => {
 
       setChallengeTechArray(technologies);
     }
-    const commentsArray = challengeComments?.map(({ content, id }) => {
-      return <Comment text={content} key={id} />;
+    const commentsArray = challengeComments?.map(({ content, id, user_id }) => {
+      return <Comment text={content} key={id} userId={user_id} />;
     });
 
     setChallengeCommentsArray(commentsArray);
@@ -196,7 +197,6 @@ const Challenge = ({ selectOptions, user }) => {
             value={commentInputText}
             onChange={(evt) => setCommentInputText(evt.target.value)}
           />
-
           <button type="submit">+</button>
         </form>
       </div>

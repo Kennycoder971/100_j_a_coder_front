@@ -13,4 +13,10 @@
     margin-left: var(--m-size);
     cursor: pointer;
   }
+
+  .options {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+  }
 }

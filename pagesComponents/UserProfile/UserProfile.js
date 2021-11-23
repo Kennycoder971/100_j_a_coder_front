@@ -9,7 +9,7 @@ import { FiSettings } from "react-icons/fi";
 import ProfileModal from "./ProfileModal";
 import getLastChallenge from "@/queries/challenges/getLastchallenge";
 import deleteLastChallenge from "@/queries/challenges/deleteLastChallenge";
-import getErrorMsg from "@/helpers/getErrorMsg";
+import { toast } from "react-toastify";
 
 const UserProfile = ({ user }) => {
   // For the tabs
@@ -31,9 +31,6 @@ const UserProfile = ({ user }) => {
   // For the modal
   const [showModal, setShowModal] = useState(false);
 
-  // To open the modal on the challenge tab
-  const [openChallenge, setOpenChallenge] = useState(false);
-
   useEffect(() => {
     if (showModal) {
       document.querySelector("body").style.overflow = "hidden";
@@ -49,7 +46,6 @@ const UserProfile = ({ user }) => {
     (async function () {
       try {
         const response = await getLastChallenge();
-        console.log(response.data);
         setChallenge(response.data.data);
       } catch (error) {
         console.log(error.response);
@@ -65,8 +61,7 @@ const UserProfile = ({ user }) => {
       setChallenge(null);
       toast.success("Votre défi a bien été supprimé.");
     } catch (error) {
-      // Print error messages
-      console.log(error.response);
+      toast.error("Une erreur s'est produite.");
     }
   }
 
@@ -92,7 +87,7 @@ const UserProfile = ({ user }) => {
                 ? `http://localhost:5000/uploads/${user?.profile_picture}`
                 : "/images/user-profile/no-image.png"
             }
-            alt="Fond d'écran."
+            alt={user?.profile_picture}
           />
         </div>
       </main>
@@ -127,7 +122,7 @@ const UserProfile = ({ user }) => {
             <p>{user?.profile ? user.profile : "Pas de description !"}</p>
           </article>
 
-          {challenge ? (
+          {challenge && user ? (
             <Challenge
               user={user}
               selectOptions={[["Supprimer", removeChallenge]]}
@@ -136,7 +131,7 @@ const UserProfile = ({ user }) => {
             <button
               className={styles.challengeButton}
               onClick={() => {
-                setOpenChallenge(true);
+                setShowModal(true);
               }}
             >
               {" "}

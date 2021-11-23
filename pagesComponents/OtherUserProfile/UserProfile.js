@@ -8,6 +8,8 @@ import Image from "next/image";
 import { FaRegEnvelope } from "react-icons/fa";
 import ProfileModal from "./ProfileModal";
 import getUserLastchallenge from "@/queries/challenges/getUserLastchallenge";
+import createFriendRequest from "@/queries/friendRequests/createFriendRequest";
+import { toast } from "react-toastify";
 
 const UserProfile = ({ user }) => {
   // For the tabs
@@ -41,13 +43,22 @@ const UserProfile = ({ user }) => {
     (async function () {
       try {
         const response = await getUserLastchallenge(user.id);
-        console.log(response.data);
         setChallenge(response.data.data);
       } catch (error) {
         console.log(error.response);
       }
     })();
   }, []);
+
+  async function addFriendRequest() {
+    try {
+      await createFriendRequest(user.id);
+      toast.success("Votre requête a été envoyé.");
+    } catch (error) {
+      toast.error("Vous avez déjà envoyé une requête à cet utilistateur.");
+    }
+  }
+
   return (
     <div className={styles.container}>
       <main className={styles.hero}>
@@ -83,7 +94,7 @@ const UserProfile = ({ user }) => {
         <div className={styles.interaction}>
           <div
             className={styles.friendRequest}
-            onClick={async (e) => await createFriendRequest(user.id)}
+            onClick={(e) => addFriendRequest(user.id)}
           >
             Ajouter +
           </div>

@@ -23,7 +23,12 @@ const FriendCard = ({ user, selectOptions }) => (
     <Link href={user?.id ? `/user/${user.id}` : "/user/me"}>
       <h4>{user.username}</h4>
     </Link>
-    {selectOptions && <SelectOption selectOptions={selectOptions} />}
+
+    {selectOptions && (
+      <div className={styles.options}>
+        <SelectOption selectOptions={selectOptions} />
+      </div>
+    )}
   </li>
 );
 
