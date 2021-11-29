@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { hasEmptyFields } from "@/helpers/clientSideValidation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -27,6 +28,9 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title> 100 jours à coder | S'inscrire </title>;
+      </Head>
       <ToastContainer />
       <LoginPage loginUser={loginUser} />;
     </>

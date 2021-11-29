@@ -87,7 +87,7 @@ const UserProfile = ({ user }) => {
                 ? `http://localhost:5000/uploads/${user?.profile_picture}`
                 : "/images/user-profile/no-image.png"
             }
-            alt={user?.profile_picture}
+            alt={user?.username}
           />
         </div>
       </main>
@@ -97,6 +97,7 @@ const UserProfile = ({ user }) => {
           <h3 className={styles.username}>{user?.username}</h3>
           <p>{user?.intro}</p>
         </div>
+
         <div
           className={styles.userSettings}
           onClick={(e) => setShowModal(true)}

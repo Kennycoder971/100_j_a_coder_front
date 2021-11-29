@@ -23,7 +23,7 @@ const Comment = ({ text, userId }) => {
             height={40}
             src={
               userCommenter?.profile_picture
-                ? userCommenter?.profile_picture
+                ? `http://localhost:5000/uploads/${userCommenter?.profile_picture}`
                 : "/images/user-profile/no-image.png"
             }
             alt={

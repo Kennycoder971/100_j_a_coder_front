@@ -21,7 +21,11 @@ export default function Navigation() {
           {user && (
             <div className={classes.user}>
               <Image
-                src="/images/navigation/user.png"
+                src={
+                  user?.profile_picture
+                    ? `http://localhost:5000/uploads/${user?.profile_picture}`
+                    : "/images/user-profile/no-image.png"
+                }
                 width={50}
                 height={50}
                 alt="user"
@@ -31,7 +35,7 @@ export default function Navigation() {
           )}
 
           <div className={classes.logo}>
-            <Link href="/">
+            <Link href={user ? "/challenges" : "/"}>
               <a>
                 <Image
                   height={40}

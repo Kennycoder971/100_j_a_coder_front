@@ -47,6 +47,9 @@
     margin-bottom: var(--m-size);
     border-bottom: 1px solid var(--white);
 
+    img {
+      border-radius: 50%;
+    }
     span {
       margin-left: var(--m-size);
     }

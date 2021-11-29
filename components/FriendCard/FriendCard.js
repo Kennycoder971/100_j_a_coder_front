@@ -13,7 +13,7 @@ const FriendCard = ({ user, selectOptions }) => (
           height={60}
           src={
             user?.profile_picture
-              ? user.profile_picture
+              ? `http://localhost:5000/uploads/${user.profile_picture}`
               : "/images/user-profile/no-image.png"
           }
           alt={user?.username}

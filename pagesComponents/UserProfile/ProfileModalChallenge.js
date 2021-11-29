@@ -42,7 +42,7 @@ export default function ProfileModalChallenge({}) {
     return arr.map((hour) => {
       return (
         <option key={hour} value={`${hour}`}>
-          {hour} heures
+          {hour} heure{hour > 1 && "s"}
         </option>
       );
     });
@@ -99,7 +99,7 @@ export default function ProfileModalChallenge({}) {
       </div>
 
       <div>
-        <label htmlFor="hours_a_day">Genre</label>
+        <label htmlFor="hours_a_day">Nombre d'heures</label>
         <select
           name="hours_a_day"
           id="hours_a_day"

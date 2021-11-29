@@ -10,11 +10,11 @@ const UserInfo = ({ user }) => (
       width={50}
       height={50}
       src={
-        user.profile_picture
-          ? user.profile_picture
+        user?.profile_picture
+          ? `http:localhost:5000/uploads/${user.profile_picture}`
           : "/images/user-profile/no-image.png"
       }
-      alt="Fond d'écran."
+      alt={user?.username}
     />
     <div className={styles.userDetails}>
       <Link passHref={`/user/${user?.id}`}>

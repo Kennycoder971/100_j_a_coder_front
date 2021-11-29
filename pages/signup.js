@@ -3,6 +3,7 @@ import AuthContext from "@/store/AuthContext";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
+import Head from "next/head";
 import "react-toastify/dist/ReactToastify.css";
 import getErrorMsg from "@/helpers/getErrorMsg";
 import {
@@ -56,6 +57,9 @@ export default function Signup() {
 
   return (
     <>
+      <Head>
+        <title> 100 jours à coder | Se connecter </title>;
+      </Head>
       <ToastContainer />
       <SignupPage registerUser={registerUser} />
     </>

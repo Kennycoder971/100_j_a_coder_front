@@ -81,7 +81,7 @@ const UserProfile = ({ user }) => {
                 ? `http://localhost:5000/uploads/${user?.profile_picture}`
                 : "/images/user-profile/no-image.png"
             }
-            alt="Fond d'écran."
+            alt={user.username}
           />
         </div>
       </main>
