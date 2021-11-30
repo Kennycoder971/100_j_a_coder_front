@@ -11,7 +11,7 @@ export default function FriendRequests({}) {
   const [requesters, setRequesters] = useState([]);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       const response = await getAllFriendRequests();
       setRequesters(response.data.data);
     })();
@@ -26,7 +26,7 @@ export default function FriendRequests({}) {
   }
 
   function deleteRequest(reqId) {
-    return async function() {
+    return async function () {
       if (confirm("En êtes vous sûr ?")) {
         await deleteFriendRequestById(reqId);
         setRequesters((prevState) => ({
@@ -40,7 +40,7 @@ export default function FriendRequests({}) {
   }
 
   function addFriend(reqId) {
-    return async function() {
+    return async function () {
       await acceptFriendRequest(reqId);
       await deleteFriendRequestById(reqId);
       setRequesters((prevState) => ({
@@ -54,18 +54,22 @@ export default function FriendRequests({}) {
 
   return (
     <div className={styles.FriendRequests}>
-      {requesters?.docs?.map((user) => {
-        return (
-          <FriendCard
-            key={user.id}
-            user={user}
-            selectOptions={[
-              ["Supprimer", deleteRequest(user.request_id_from)],
-              ["Ajouter", addFriend(user.request_id_from)],
-            ]}
-          />
-        );
-      })}
+      {requesters?.docs?.length ? (
+        requesters?.docs?.map((user) => {
+          return (
+            <FriendCard
+              key={user.id}
+              user={user}
+              selectOptions={[
+                ["Supprimer", deleteRequest(user.request_id_from)],
+                ["Ajouter", addFriend(user.request_id_from)],
+              ]}
+            />
+          );
+        })
+      ) : (
+        <p>Vous n'avez pas de requêtes d'amis.</p>
+      )}
 
       {requesters.next && (
         <button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import styles from "./Challenge.module.scss";
@@ -6,7 +6,6 @@ import Comment from "../Comment/Comment";
 import Category from "../Category/Category";
 import Image from "next/dist/client/image";
 import Link from "next/dist/client/link";
-
 import { useState, useEffect } from "react";
 import { getTimeRemaining, daysAgo } from "@/helpers/formatDates";
 import createChallengeLike from "@/queries/challengeLikes/createChallengeLike";
@@ -16,7 +15,11 @@ import getChallengeComments from "@/queries/challengeComments/getChallengeComent
 import createChallengeComments from "@/queries/challengeComments/createChallengeComments";
 import getErrorMsg from "@/helpers/getErrorMsg";
 import getUserById from "@/queries/users/getUserById";
+import AuthContext from "@/store/AuthContext";
+
 const Challenge = ({ chall, userId }) => {
+  const { user: connectedUser } = useContext(AuthContext);
+
   const [challenge, setChallenge] = useState(null);
   const [user, setUser] = useState(null);
   const [challengeLikes, setChallengeLikes] = useState(null);
@@ -76,8 +79,8 @@ const Challenge = ({ chall, userId }) => {
   useEffect(() => {
     // Create a array of categories from the challenge.technologies
 
-    if (challenge?.technologies) {
-      const techArray = challenge?.technologies?.split(",");
+    if (chall?.technologies) {
+      const techArray = chall?.technologies?.split(",");
       const technologies = techArray?.map((tech, index) => (
         <Category text={tech} key={index} />
       ));
@@ -161,12 +164,12 @@ const Challenge = ({ chall, userId }) => {
             </div>
           </div>
 
-          <h3 className={styles.challengeTitle}>{challenge?.text}</h3>
+          <h3 className={styles.challengeTitle}>{chall?.text}</h3>
           <div className={styles.timeADay}>
-            Pendant {challenge?.hours_a_day} heures pas jours
+            Pendant {chall?.hours_a_day} heures pas jours
           </div>
 
-          {challenge?.technologies && (
+          {chall?.technologies && (
             <>
               <h3 className={styles.techologiesTitle}>Technologies:</h3>
               <div className={styles.techologies}>{challengeTechArray}</div>
@@ -180,8 +183,8 @@ const Challenge = ({ chall, userId }) => {
           width={40}
           height={40}
           src={
-            user?.profile_picture
-              ? `http://localhost:5000/uploads/${user?.profile_picture}`
+            connectedUser?.profile_picture
+              ? `http://localhost:5000/uploads/${connectedUser?.profile_picture}`
               : "/images/user-profile/no-image.png"
           }
           alt={user?.username}

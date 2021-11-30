@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./Message.module.scss";
-import Image from "next/dist/client/image";
 
 const Message = ({ userClass }) => (
   <li className={`${styles.Message}`}>
-    <span className={userClass}>lo</span>
+    <span className={userClass}>lorem</span>
   </li>
 );
 

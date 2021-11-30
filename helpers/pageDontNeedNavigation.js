@@ -5,6 +5,6 @@
  */
 export default function pageDontNeedNavigation(router) {
   const path = router.asPath;
-  const pathsArray = ["/login", "/signup"];
+  const pathsArray = ["/login", "/signup", "/messages"];
   return pathsArray.includes(path);
 }

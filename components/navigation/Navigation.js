@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HambergerMenu from "./HambergerMenu";
 import AuthContext from "@/store/AuthContext";
+import { FaRegEnvelope, FaUserSlash, FaSearch } from "react-icons/fa";
 
 export default function Navigation() {
   const [navOpen, setNavOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Navigation() {
                 height={50}
                 alt="user"
               />
-              <span>Jean-Kévin</span>
+              <span>{user?.username}</span>
             </div>
           )}
 
@@ -86,6 +87,17 @@ export default function Navigation() {
                     </a>
                   </Link>
                 </li>
+                <li
+                  className={classes.navItem}
+                  onClick={(e) => setNavOpen(false)}
+                >
+                  <Link href="/search">
+                    <a>
+                      <FaSearch />
+                      <span>Rechercher</span>
+                    </a>
+                  </Link>
+                </li>
 
                 <li
                   className={classes.navItem}
@@ -93,12 +105,7 @@ export default function Navigation() {
                 >
                   <Link href="/messages">
                     <a>
-                      <Image
-                        width={16}
-                        height={16}
-                        src="/images/navigation/profil.svg"
-                        alt="Profil"
-                      />
+                      <FaRegEnvelope />
                       <span>Messages</span>
                     </a>
                   </Link>
@@ -113,12 +120,7 @@ export default function Navigation() {
                 >
                   <Link href="/">
                     <a>
-                      <Image
-                        width={16}
-                        height={16}
-                        src="/images/navigation/profil.svg"
-                        alt="Profil"
-                      />
+                      <FaUserSlash />
                       <span>Se déconnecter</span>
                     </a>
                   </Link>

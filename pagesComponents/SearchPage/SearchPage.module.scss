@@ -1,0 +1,23 @@
+.SearchPage {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1100px;
+  min-height: 50vh;
+  h1 {
+    text-align: center;
+    margin-bottom: var(--l-size);
+    margin-top: 2vh;
+  }
+
+  form {
+    margin: auto;
+    max-width: 500px;
+  }
+
+  .userList {
+    max-width: 500px;
+    margin: var(--l-size) auto;
+    gap: var(--l-size);
+    display: grid;
+  }
+}

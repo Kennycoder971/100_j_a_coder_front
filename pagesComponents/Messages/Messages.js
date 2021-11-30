@@ -5,7 +5,6 @@ import Message from "@/components/Message/Message";
 import { BiLeftArrowCircle } from "react-icons/bi";
 import { AiOutlineSend } from "react-icons/ai";
 import { IconContext } from "react-icons";
-import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 
 const Messages = () => {
@@ -15,13 +14,11 @@ const Messages = () => {
     <div className={styles.Messages}>
       <div className={styles.container}>
         <nav className={styles.nav}>
-          <Link href="#">
-            <div className={styles.backBtn} onClick={(e) => router.back()}>
-              <IconContext.Provider value={{ size: "3rem" }}>
-                <BiLeftArrowCircle />
-              </IconContext.Provider>
-            </div>
-          </Link>
+          <div className={styles.backBtn} onClick={(e) => router.back()}>
+            <IconContext.Provider value={{ size: "3rem" }}>
+              <BiLeftArrowCircle />
+            </IconContext.Provider>
+          </div>
 
           <h1>Messages</h1>
         </nav>

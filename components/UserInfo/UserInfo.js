@@ -17,7 +17,7 @@ const UserInfo = ({ user }) => (
       alt={user?.username}
     />
     <div className={styles.userDetails}>
-      <Link passHref={`/user/${user?.id}`}>
+      <Link href={`/user/${user?.id}`}>
         <h4>Jean-luc</h4>
       </Link>
 

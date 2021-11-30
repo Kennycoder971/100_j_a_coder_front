@@ -8,17 +8,20 @@ export default function FriendList() {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       const response = await getFriends();
       setFriends(response.data.data);
     })();
   }, []);
 
   function deleteFriend(friendId) {
-    return async function() {
+    return async function () {
       if (confirm("En êtes vous sûr ?")) {
         try {
           await deleteFriendById(friendId);
+          setFriends((prevState) =>
+            prevState.filter((friend) => friend.id !== friendId)
+          );
         } catch (error) {
           console.log(error.response);
         }
@@ -28,15 +31,19 @@ export default function FriendList() {
 
   return (
     <ul className={styles.FriendList}>
-      {friends?.map((user) => {
-        return (
-          <FriendCard
-            key={user.id}
-            user={user}
-            selectOptions={[["Supprimer", deleteFriend(user.id)]]}
-          />
-        );
-      })}
+      {friends.length ? (
+        friends?.map((user) => {
+          return (
+            <FriendCard
+              key={user.id}
+              user={user}
+              selectOptions={[["Supprimer", deleteFriend(user.id)]]}
+            />
+          );
+        })
+      ) : (
+        <p>Vous n'avez pas encore d'amis.</p>
+      )}
     </ul>
   );
 }

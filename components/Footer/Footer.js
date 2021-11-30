@@ -2,8 +2,11 @@ import Link from "next/link";
 import BtnLink from "../BtnLink.js/BtnLink";
 import classes from "./Footer.module.scss";
 import Image from "next/image";
+import { useContext } from "react";
+import AuthContext from "@/store/AuthContext";
 
 export default function Footer() {
+  const { user } = useContext(AuthContext);
   return (
     <footer className={classes.footer}>
       <div className={classes.wavesContainer}>
@@ -34,16 +37,18 @@ export default function Footer() {
             </li>
           </div>
         </ul>
-        <div className={classes.btnContainer}>
-          <div>
-            <BtnLink color="blue" to="/signup">
-              Inscription
+        {!user && (
+          <div className={classes.btnContainer}>
+            <div>
+              <BtnLink color="blue" to="/signup">
+                Inscription
+              </BtnLink>
+            </div>
+            <BtnLink color="green" to="/login">
+              Connexion
             </BtnLink>
           </div>
-          <BtnLink color="green" to="/login">
-            Connexion
-          </BtnLink>
-        </div>
+        )}
       </div>
     </footer>
   );

@@ -108,6 +108,7 @@ const Challenge = ({ selectOptions, user }) => {
       // Get comments for the challenge
       const response = await getChallengeComments(challengeId);
       setChallengeComments(response.data.data);
+      setCommentInputText("");
     } catch (error) {
       // Print error messages
       getErrorMsg(error.response.data).forEach((errMsg) => {

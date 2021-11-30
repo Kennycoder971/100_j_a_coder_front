@@ -3,7 +3,6 @@ import styles from "./UserProfile.module.scss";
 import Challenge from "@/components/Challenge/Challenge";
 import APropos from "./APropos";
 import FriendList from "./FriendList";
-import Link from "next/link";
 import Image from "next/image";
 import { FaRegEnvelope } from "react-icons/fa";
 import ProfileModal from "./ProfileModal";
